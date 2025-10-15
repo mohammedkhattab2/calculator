@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return (MaterialApp(
-      title: "Magazine App",
+      title: "calculator App",
       initialRoute: CalculatorScreen.routName,
       routes: {
         "login" : (_) => LoginScreen(),
