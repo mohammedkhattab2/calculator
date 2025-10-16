@@ -6,18 +6,20 @@ class CalculatorButton extends StatelessWidget {
   final Color backGroundColor;
   final Color textColor;
   final String digit;
+  final Function onPress; 
   const CalculatorButton({
     super.key,
     this.flex = 1,
     this.backGroundColor = CalculatorColors.gray,
     this.textColor = CalculatorColors.darkBlue,
     required this.digit,
+    required this.onPress,
   });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex : flex ,
+      flex: flex,
       child: Container(
         margin: EdgeInsets.all(10),
         child: ElevatedButton(
@@ -26,9 +28,10 @@ class CalculatorButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
-        
           ),
-          onPressed: () {},
+          onPressed: () {
+            onPress(digit);
+          },
           child: Text(
             digit,
             style: CalculatorStyles.darkBlue32medium.copyWith(color: textColor),

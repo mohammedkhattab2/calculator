@@ -2,11 +2,19 @@ import 'package:calculator/calculator/calculator_button.dart';
 import 'package:calculator/calculator/calculator_style.dart';
 import 'package:flutter/material.dart';
 
-class CalculatorScreen extends StatelessWidget {
+class CalculatorScreen extends StatefulWidget {
   static const String routName = "calculator";
 
   const CalculatorScreen({super.key});
 
+  @override
+  State<CalculatorScreen> createState() => _CalculatorScreenState();
+}
+
+class _CalculatorScreenState extends State<CalculatorScreen> {
+  String result = "";
+  String lhs = "";
+  String savedOperation = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +27,7 @@ class CalculatorScreen extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 child: Text(
-                  "12.454",
+                  result,
                   textAlign: TextAlign.end,
                   style: CalculatorStyles.white48medium,
                 ),
@@ -34,21 +42,25 @@ class CalculatorScreen extends StatelessWidget {
                   digit: "AC",
                   backGroundColor: CalculatorColors.gray,
                   textColor: CalculatorColors.veryLightGray,
+                  onPress: onDigitclick,
                 ),
                 CalculatorButton(
                   digit: "C",
                   backGroundColor: CalculatorColors.gray,
                   textColor: CalculatorColors.veryLightGray,
+                  onPress: onDigitclick,
                 ),
                 CalculatorButton(
                   digit: "/",
                   backGroundColor: CalculatorColors.darkBlue,
                   textColor: CalculatorColors.white,
+                  onPress: onDigitclick,
                 ),
                 CalculatorButton(
                   digit: "*",
                   backGroundColor: CalculatorColors.darkBlue,
                   textColor: CalculatorColors.white,
+                  onPress: onOperationClick,
                 ),
               ],
             ),
@@ -61,21 +73,25 @@ class CalculatorScreen extends StatelessWidget {
                   digit: "7",
                   backGroundColor: CalculatorColors.gray,
                   textColor: CalculatorColors.lightblue,
+                  onPress: onDigitclick,
                 ),
                 CalculatorButton(
                   digit: "8",
                   backGroundColor: CalculatorColors.gray,
                   textColor: CalculatorColors.lightblue,
+                  onPress: onDigitclick,
                 ),
                 CalculatorButton(
                   digit: "9",
                   backGroundColor: CalculatorColors.gray,
                   textColor: CalculatorColors.lightblue,
+                  onPress: onDigitclick,
                 ),
                 CalculatorButton(
                   digit: "-",
                   backGroundColor: CalculatorColors.darkBlue,
                   textColor: CalculatorColors.white,
+                  onPress: onOperationClick,
                 ),
               ],
             ),
@@ -96,16 +112,19 @@ class CalculatorScreen extends StatelessWidget {
                               digit: "4",
                               backGroundColor: CalculatorColors.gray,
                               textColor: CalculatorColors.lightblue,
+                              onPress: onDigitclick,
                             ),
                             CalculatorButton(
                               digit: "5",
                               backGroundColor: CalculatorColors.gray,
                               textColor: CalculatorColors.lightblue,
+                              onPress: onDigitclick,
                             ),
                             CalculatorButton(
                               digit: "6",
                               backGroundColor: CalculatorColors.gray,
                               textColor: CalculatorColors.lightblue,
+                              onPress: onDigitclick,
                             ),
                           ],
                         ),
@@ -118,16 +137,19 @@ class CalculatorScreen extends StatelessWidget {
                               digit: "1",
                               backGroundColor: CalculatorColors.gray,
                               textColor: CalculatorColors.lightblue,
+                              onPress: onDigitclick,
                             ),
                             CalculatorButton(
                               digit: "2",
                               backGroundColor: CalculatorColors.gray,
                               textColor: CalculatorColors.lightblue,
+                              onPress: onDigitclick,
                             ),
                             CalculatorButton(
                               digit: "3",
                               backGroundColor: CalculatorColors.gray,
                               textColor: CalculatorColors.lightblue,
+                              onPress: onDigitclick,
                             ),
                           ],
                         ),
@@ -141,11 +163,13 @@ class CalculatorScreen extends StatelessWidget {
                               flex: 2,
                               backGroundColor: CalculatorColors.gray,
                               textColor: CalculatorColors.lightblue,
+                              onPress: onDigitclick,
                             ),
                             CalculatorButton(
                               digit: ".",
                               backGroundColor: CalculatorColors.gray,
                               textColor: CalculatorColors.lightblue,
+                              onPress: onDigitclick,
                             ),
                           ],
                         ),
@@ -161,11 +185,13 @@ class CalculatorScreen extends StatelessWidget {
                         digit: "+",
                         backGroundColor: CalculatorColors.darkBlue,
                         textColor: CalculatorColors.white,
+                        onPress: onOperationClick,
                       ),
                       CalculatorButton(
                         digit: "=",
                         backGroundColor: CalculatorColors.lightblue,
                         textColor: CalculatorColors.white,
+                        onPress: onOperationClick,
                       ),
                     ],
                   ),
@@ -177,4 +203,20 @@ class CalculatorScreen extends StatelessWidget {
       ),
     );
   }
+
+  void onDigitclick(String digit) {
+    result += digit;
+    setState(() {});
+  }
+
+  void onOperationClick(String clickedOperator) {
+    if (clickedOperator.isEmpty) {
+      lhs = result;
+      savedOperation = clickedOperator;
+      result = "";
+      setState(() {});
+    } else {}
+  }
+
+
 }
