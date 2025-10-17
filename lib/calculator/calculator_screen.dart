@@ -191,7 +191,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                         digit: "=",
                         backGroundColor: CalculatorColors.lightblue,
                         textColor: CalculatorColors.white,
-                        onPress: onOperationClick,
+                        onPress: onequalklick,
                       ),
                     ],
                   ),
@@ -210,13 +210,41 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   void onOperationClick(String clickedOperator) {
-    if (clickedOperator.isEmpty) {
+    if (savedOperation.isEmpty) {
       lhs = result;
       savedOperation = clickedOperator;
       result = "";
       setState(() {});
-    } else {}
+    } else {
+      lhs = calculate(lhs, savedOperation, result);
+      savedOperation = clickedOperator;
+      result = "";
+      setState(() {});
+    }
+    print("result is $result, lhs is $lhs, saved operation is $savedOperation");
   }
 
+  void onequalklick(_) {
+    result = calculate(lhs, savedOperation, result);
+    setState(() {
+      
+    });
+  }
 
+  String calculate(String lhs, String operator, String rhs) {
+    double n1 = double.parse(lhs);
+    double n2 = double.parse(rhs);
+    switch (operator) {
+      case "+":
+        return (n1 + n2).toString();
+      case "-":
+        return (n1 - n2).toString();
+      case "*":
+        return (n1 * n2).toString();
+      case "/":
+        return (n1 / n2).toString();
+      default:
+        return "0";
+    }
+  }
 }
