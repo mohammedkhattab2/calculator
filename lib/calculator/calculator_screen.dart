@@ -205,6 +205,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   void onDigitclick(String digit) {
+    if (result.contains(".") && digit == ".") return;
     result += digit;
     setState(() {});
   }
@@ -216,6 +217,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       result = "";
       setState(() {});
     } else {
+      if (result.isEmpty)return;
       lhs = calculate(lhs, savedOperation, result);
       savedOperation = clickedOperator;
       result = "";
@@ -225,10 +227,11 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   void onequalklick(_) {
+    if (result.isEmpty) return;
     result = calculate(lhs, savedOperation, result);
-    setState(() {
-      
-    });
+    lhs = "";
+    savedOperation = "";
+    setState(() {});
   }
 
   String calculate(String lhs, String operator, String rhs) {
